@@ -1,4 +1,5 @@
 var stompClient = null;
+var initalMessages = true;
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -29,6 +30,7 @@ function disconnect() {
     }
     setConnected(false);
     console.log("Disconnected");
+    initalMessages = true;
 }
 
 function sendMesssage() {
@@ -38,6 +40,17 @@ function sendMesssage() {
 }
 
 function showMessage(message) {
+    if (Array.isArray(message)) {
+        if (initalMessages) {
+            message.forEach(
+                function (x) {$("#messages").append("<tr><td>" + "(" + x.timestamp.substring(11, 16) + ") " + 
+                x.user + ": " + x.content + "</td></tr>");}
+            )
+        }
+        initalMessages = false;
+    }
+    else 
+
     $("#messages").append("<tr><td>" + "(" + message.timestamp.substring(11, 16) + ") " + 
     message.user + ": " + message.content + "</td></tr>");
 }
