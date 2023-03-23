@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Message {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     private String user;
     private String content;
